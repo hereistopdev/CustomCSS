@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: grid;
+        place-items: center;
+        position: relative;
+        /* height: 100vh; */
+        /* background-color: #9a99f2; */
+        background: #212534;
+      }
+
+      .swiper-container {
+        border-radius: 5px;
+        width: 70vw;
+        overflow: hidden;
+        height: fit-content;
+        height: fit-content;
+        font-size: 50px;
+        position: relative;
+        padding-bottom: 50px;
+        font-family: sans-serif;
+      }
+
+      .swiper-slide {
+        width: auto;
+        height: fit-content;
+        display: flex;
+        height: auto;
+        border-radius: 5px;
+        overflow: hidden;
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 0px;
+        font-family: Nunito;
+        /* background-color: white; */
+      }
+
+      .swiper-slide .ImgHolder {
+        /* background-color: #4361ee; */
+        display: flex;
+        width: 100%;
+        height: auto;
+        padding: 30px;
+        border-bottom-left-radius: 20px;
+      }
+
+      .ContentHolder::before {
+        /* background-color: #4361ee; */
+        content: "";
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: -5px;
+        z-index: -1;
+        right: 0px;
+      }
+
+      .ContentHolder {
+        position: relative;
+        padding: 10px;
+        background-color: white;
+        /* border-top-right-radius: 20px; */
+        border-radius: 20px;
+        margin: 10px;
+        width: 90%;
+      }
+
+      .swiper-pagination-bullet {
+        background-color: white;
+        opacity: 1;
+        border: 1px solid #4361ee;
+      }
+
+      .swiper-pagination-bullet-active {
+        background-color: #4361ee;
+      }
+
+      .swiper-button {
+        border: 1px solid white;
+      }
+
+      .swiper-slide img {
+        width: 100px;
+        height: 100px;
+        /* border-radius: 50%; */
+        margin: auto;
+        object-fit: cover;
+        /* border: 3px solid #4361ee; */
+        /* outline: 2px solid white; */
+      }
+
+      .swiper-slide h3 {
+        font-size: 1.1rem;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .swiper-slide p {
+        font-size: 0.9rem;
+        padding: 5px;
+      }
+
+      @media (max-width: 638px) {
+        .swiper-container {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 500px) {
+        .swiper-container {
+          width: 90vw;
+        }
+      }
+
+      @media (max-width: 300px) {
+        .swiper-container {
+          width: 100%;
+        }
+
+        .swiper-slide {
+          border-radius: 0px;
+        }
+
+        .swiper-container .ImgHolder {
+          border-radius: 0px;
+        }
+        .ContentHolder {
+          border-radius: 0px;
+        }
+      }
+
+      .header {
+        margin: 0px 0px 40px;
+        text-align: center;
+      }
+      .title {
+        color: white;
+        font-size: 40px;
+      }
+      .logo-img {
+        width: 150px;
+        height: 150px;
+      }
+
+      @property --rotate {
+        syntax: "<angle>";
+        initial-value: 132deg;
+        inherits: false;
+      }
+
+      .card {
+        width: var(--card-width);
+        height: var(--card-height);
+        padding: 3px;
+        position: relative;
+        border-radius: 20px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        display: flex;
+        font-size: 1.5em;
+        color: rgb(88 199 250 / 100%);
+        /* color: rgb(88 199 250 / 0%); */
+        cursor: pointer;
+        font-family: cursive;
+      }
+
+      .card:hover {
+        color: rgb(88 199 250 / 100%);
+        transition: color 1s;
+        border: 2px solid white;
+      }
+      .card:hover:before,
+      .card:hover:after {
+        animation: none;
+        /* opacity: 0; */
+      }
+
+      .card::before {
+        content: "";
+        width: 104%;
+        height: 102%;
+        border-radius: 8px;
+        background-image: linear-gradient(
+          var(--rotate),
+          #5ddcff,
+          #3c67e3 43%,
+          #4e00c2
+        );
+        position: absolute;
+        z-index: -1;
+        top: -1%;
+        left: -2%;
+        animation: spin 3s linear infinite;
+      }
+
+      .card::after {
+        position: absolute;
+        content: "";
+        top: calc(var(--card-height) / 6);
+        left: 0;
+        right: 0;
+        z-index: -1;
+        height: 100%;
+        width: 100%;
+        margin: 0 auto;
+        transform: scale(0.8);
+        filter: blur(calc(var(--card-height) / 6));
+        /* background-image: linear-gradient(
+          var(--rotate),
+          #5ddcff,
+          #3c67e3 43%,
+          #4e00c2
+        ); */
+        opacity: 1;
+        transition: opacity 0.5s;
+        animation: spin 5s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          --rotate: 0deg;
+        }
+        100% {
+          --rotate: 360deg;
+        }
+      }
+
+      a {
+        color: #212534;
+        text-decoration: none;
+        font-family: sans-serif;
+        font-weight: bold;
+        margin-top: 2rem;
+      }
+
+      html {
+        width: 100%;
+        height: 100%;
+      }
+      body {
+        /* background: aqua; */
+        text-align: center;
+        transition: background 5s ease-in-out;
+      }
+      button:focus,
+      input:focus {
+        outline: none;
+      }
+      .main-app {
+        /* top: 50%; */
+        /* transform: translateY(50vh); */
+        display: flex;
+        justify-content: center;
+        margin: 10px;
+      }
+      .submit {
+        background: transparent;
+        border: none;
+        font-size: 30px;
+        transition: 0.5s ease-in-out;
+        margin-left: 5px;
+        color: cadetblue;
+      }
+      .search-bar {
+        background: transparent;
+        width: 0%;
+        height: 30px;
+        border: none;
+        font-size: 15px;
+        color: cadetblue;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        border-bottom: 2px solid cadetblue;
+        transition: width 0.5s ease-in-out, padding 0.2s ease-in-out;
+        font-weight: 800;
+        text-align: center;
+      }
+      .icon-img {
+        border: 0px !important;
+        width: 30px !important;
+        height: 30px !important;
+        border-radius: 0px !important;
+      }
+      .submit-btn {
+        background: none;
+        border: none;
+        margin: 20px 0px;
+        padding: 10px;
+      }
+      .submit-btn:hover {
+        cursor: pointer;
+      }
+      .send-img {
+        width: 50px !important;
+        height: 50px !important;
+        opacity: 0.7;
+      }
+      .send-img:hover {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="craouselContainer"
+      class="swiper-container"
+      style="margin-top: 20px"
+    >
+      <div class="header">
+        <img
+          src="https://i.ibb.co/TYQGW58/itty-page-logos-white.png"
+          alt="logo"
+          srcset=""
+          class="logo-img"
+        />
+        <h1 class="title">Traveler's Emergency</h1>
+      </div>
+      <div class="swiper-wrapper" id="slideHolder">
+        <!-- Slides -->
+      </div>
+      <div class="swiper-pagination"></div>
+      <button class="submit-btn">
+        <img
+          class="icon-img send-img"
+          src="https://cdn-icons-png.flaticon.com/128/3033/3033057.png"
+          alt="submit"
+        />
+      </button>
+    </div>
+    <script>
+      var testiomnialData = [
+        {
+          avatar: "https://cdn-icons-png.flaticon.com/128/2200/2200326.png",
+          name: "Country / City / Address",
+          review: `
+                <div class='main-app'>
+              <input type='text' class='search-bar' placeholder="Country" />
+              <button class='submit'>
+                <img class='icon-img' src="https://cdn-icons-png.flaticon.com/128/1842/1842150.png" alt="address"  /></button></div>
+            <div class='main-app'>
+              <input type='text' class='search-bar' placeholder="City" />
+              <button class='submit'>
+                <img class='icon-img' src="https://cdn-icons-png.flaticon.com/128/10490/10490225.png" alt="address"  /></button></div>
+                <div class='main-app'>
+              <input type='text' class='search-bar' placeholder="Accommodation Address" />
+              <button class='submit'>
+                <img class='icon-img' src="https://cdn-icons-png.flaticon.com/128/10913/10913508.png" alt="address"  />
+                </button></div>`,
+        },
+        {
+          avatar: "https://cdn-icons-png.flaticon.com/128/2965/2965293.png",
+          name: "Start & End Date",
+          review: `
+            <div class='main-app'>
+              <input type='date' class='search-bar' placeholder="Start date" />
+              <button class='submit'>
+                <img class='icon-img' src="https://cdn-icons-png.flaticon.com/128/10473/10473587.png" alt="start date"  /></button></div>
+            <div class='main-app'>
+              <input type='date' class='search-bar' placeholder="End date" />
+              <button class='submit'>
+                <img class='icon-img' src="https://cdn-icons-png.flaticon.com/128/7933/7933336.png" alt="end date"  /></button></div>`,
+        },
+        {
+          avatar: "https://cdn-icons-png.flaticon.com/128/9211/9211930.png",
+          name: "Emergency",
+          review: `
+                <div class='main-app'>
+              <input type='text' class='search-bar' placeholder="Contact" />
+              <button class='submit'>
+                <img class='icon-img' src="https://cdn-icons-png.flaticon.com/128/3192/3192750.png" alt="contact"  /></button></div>
+            <div class='main-app'>
+              <input type='text' class='search-bar' placeholder="Medical status" />
+              <button class='submit'>
+                <img class='icon-img' src="https://cdn-icons-png.flaticon.com/128/2448/2448439.png" alt="medical"  /></button></div>
+                <div class='main-app'>
+              <input type='text' class='search-bar' placeholder="Passport Number" />
+              <button class='submit'>
+                <img class='icon-img' src="https://cdn-icons-png.flaticon.com/128/5908/5908853.png" alt="passport"  />
+                </button></div>`,
+        },
+        {
+          avatar: "https://cdn-icons-png.flaticon.com/128/7693/7693116.png",
+          name: "Police",
+          review: `
+                <div class='main-app'>
+              <input type='text' class='search-bar' placeholder="Contact" />
+              <button class='submit'>
+                <img class='icon-img' src="https://cdn-icons-png.flaticon.com/128/3192/3192750.png" alt="contact"  /></button></div>
+            <div class='main-app'>
+              <input type='text' class='search-bar' placeholder="Medical status" />
+              <button class='submit'>
+                <img class='icon-img' src="https://cdn-icons-png.flaticon.com/128/2448/2448439.png" alt="medical"  /></button></div>
+                <div class='main-app'>
+              <input type='text' class='search-bar' placeholder="Passport Number" />
+              <button class='submit'>
+                <img class='icon-img' src="https://cdn-icons-png.flaticon.com/128/5908/5908853.png" alt="passport"  />
+                </button></div>`,
+        },
+        {
+          avatar: "https://cdn-icons-png.flaticon.com/128/4325/4325959.png",
+          name: "Fire Department",
+          review: `
+                <div class='main-app'>
+              <input type='text' class='search-bar' placeholder="Contact" />
+              <button class='submit'>
+                <img class='icon-img' src="https://cdn-icons-png.flaticon.com/128/3192/3192750.png" alt="contact"  /></button></div>
+            <div class='main-app'>
+              <input type='text' class='search-bar' placeholder="Medical status" />
+              <button class='submit'>
+                <img class='icon-img' src="https://cdn-icons-png.flaticon.com/128/2448/2448439.png" alt="medical"  /></button></div>
+                <div class='main-app'>
+              <input type='text' class='search-bar' placeholder="Passport Number" />
+              <button class='submit'>
+                <img class='icon-img' src="https://cdn-icons-png.flaticon.com/128/5908/5908853.png" alt="passport"  />
+                </button></div>`,
+        },
+        {
+          avatar: "https://cdn-icons-png.flaticon.com/128/9746/9746996.png",
+          name: "Embassy",
+          review: `
+                <div class='main-app'>
+              <input type='text' class='search-bar' placeholder="Contact" />
+              <button class='submit'>
+                <img class='icon-img' src="https://cdn-icons-png.flaticon.com/128/3192/3192750.png" alt="contact"  /></button></div>
+            <div class='main-app'>
+              <input type='text' class='search-bar' placeholder="Medical status" />
+              <button class='submit'>
+                <img class='icon-img' src="https://cdn-icons-png.flaticon.com/128/2448/2448439.png" alt="medical"  /></button></div>
+                <div class='main-app'>
+              <input type='text' class='search-bar' placeholder="Passport Number" />
+              <button class='submit'>
+                <img class='icon-img' src="https://cdn-icons-png.flaticon.com/128/5908/5908853.png" alt="passport"  />
+                </button></div>`,
+        },
+      ];
+      var slideHolder = document.querySelector("#slideHolder");
+      for (let i of testiomnialData)
+        slideHolder.innerHTML += `
+          <div class="swiper-slide card">
+            <div class="ImgHolder">
+              <img src="${i.avatar}">
+            </div>
+            <div class="ContentHolder">
+              <h3>${i.name}</h3>
+              <p>${i.review}</p>
+            </div>
+          </div>`;
+
+      const swiper = new Swiper("#craouselContainer", {
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 2.3,
+        loop: true,
+        spaceBetween: 30,
+        effect: "coverflow",
+        coverflowEffect: {
+          rotate: 0,
+          depth: 800,
+          slideShadows: true,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        autoplay: { delay: 50000 },
+      });
+      window.onresize = queryResizer;
+      queryResizer();
+      function queryResizer() {
+        if (window.innerWidth < 724) swiper.params.slidesPerView = 2;
+        if (window.innerWidth > 501) swiper.params.slidesPerView = 2;
+        if (window.innerWidth > 724) swiper.params.slidesPerView = 2.3;
+        if (window.innerWidth < 501) swiper.params.slidesPerView = 1;
+        swiper.update();
+      }
+
+      const bgcols = [
+        "rgb(210, 90, 90)",
+        "rgb(6, 179, 219)",
+        "rgb(99, 211, 134)",
+        "#7FD1B9",
+        "#7A6563",
+      ];
+      const changeBG = () => {
+        const index = Math.floor(Math.random() * 5);
+        document.body.style.cssText = "background-color: " + bgcols[index];
+      };
+      setInterval(changeBG, 5000);
+      $(".main-app").mouseover((item) => {
+        const temp = item.currentTarget;
+        const sb = item.currentTarget.firstElementChild;
+        sb.style.width = "70%";
+        sb.style.padding = "0px";
+      });
+      $(".main-app").mouseout(() => {
+        $(".search-bar").css("width", "0%", "padding", "0px");
+        $(".search-bar").css("padding", "0px");
+      });
+    </script>
+  </body>
+</html>
